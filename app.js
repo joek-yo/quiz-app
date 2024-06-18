@@ -9,11 +9,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.render('index');
-});
-
-app.get('/quiz', (req, res) => {
-  res.render('quiz', { questions });
+  res.render('index', { questions });
 });
 
 app.post('/submit', (req, res) => {

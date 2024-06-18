@@ -1,5 +1,3 @@
-<!-- quiz.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +9,27 @@
 </head>
 <body>
     <h1>Quiz</h1>
-    <form action="/submit" method="POST">
-        <!-- Quiz questions will be inserted here -->
+    <button id="startQuizBtn">Start Quiz</button>
+    <form action="/submit" method="POST" id="quizForm" style="display: none;">
+        <% questions.forEach((question, index) => { %>
+            <div class="question" id="question<%= index %>">
+                <h2><%= index + 1 %>. <%= question.question %></h2>
+                <% question.options.forEach((option) => { %>
+                    <label>
+                        <input type="radio" name="answer<%= index %>" value="<%= option %>">
+                        <%= option %>
+                    </label><br>
+                <% }) %>
+            </div>
+        <% }) %>
         <button type="submit">Submit Quiz</button>
     </form>
+
+    <script>
+        document.getElementById('startQuizBtn').addEventListener('click', function() {
+            document.getElementById('startQuizBtn').style.display = 'none';
+            document.getElementById('quizForm').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
